@@ -27,8 +27,11 @@ class UsersController extends Controller
                 'user' => $user,
                 'microposts' => $microposts
                 ];
+                
             
             $data += $this->counts($user);
+            
+            
             
             return view('users.show',$data);
     }
