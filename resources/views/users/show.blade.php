@@ -14,6 +14,8 @@
                 </div>
                 
             </div>
+            @include('user_follow.follow_button', ['user' => $user])
+             @include('users.card', ['user' => $user])
         </aside>
         
         <div class="col-sm-8">
@@ -22,7 +24,7 @@
                 <li class="nav-item"><a href="#" class="nav-link">Followings</a></li>
                 <li class="nav-item"><a href="#" class="nav-link">Followers</a></li>
             </ul>
-            
+            @include('users.navtabs', ['user' => $user])
             @if (Auth::id() == $user->id)
                 {!! Form::open(['route' => 'microposts.store']) !!}
                     <div class="form-group">
