@@ -9,12 +9,18 @@ use App\Micropost;
 class UsersController extends Controller
 {
     public function index()
-    {$users =User::orderBy('id','desc')->paginate(10);
-    
-    
-    return view('users.index',[
-        'users' => $users,
-        ]);
+    {
+        $data = [];
+        if (\Auth::check()) {
+            $user = \Auth::user();
+            $microposts = $user->feed_microposts()->orderBy('created_at', 'desc')->paginate(10);
+
+            $data = [
+                'user' => $user,
+                'microposts' => $microposts,
+            ];
+        }
+        return view('welcome', $data);
     }
     
     public function show($id){
@@ -58,9 +64,26 @@ class UsersController extends Controller
             'user' =>$user,
             'users' =>$followers,
             ];
-        return view('users.followers');
+            
+            $data += $this->counts($user);
+            
+        return view('users.followers',$data);
     }        
-
+    //favoritePage
     
-    
+    public function favorites($id){
+        
+        $user = User::find($id);
+        $favorites = $user->favorites()->paginate(10);
+        
+        $data =[
+            'user' =>$user,
+            'microposts' => $favorites,
+            ];
+            
+            $data += $this->counts($user);
+            
+        return view('users.favorites',$data);
+        
+    }    
 }

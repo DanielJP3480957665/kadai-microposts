@@ -17,6 +17,7 @@
                             <li class="dropdown-item">{!! link_to_route('users.show', 'My profile', ['id' => Auth::id()]) !!}</li>
                             <li class="dropdown-divider">{!! link_to_route('users.index', 'Users', [], ['class' => 'nav-link']) !!}</li>
                             <li class="dropdown-item">{!! link_to_route('logout.get', 'Logout') !!}</li>
+                            <li class="dropdown-item">{!! link_to_route('users.favorites', 'favorites',['id' => $user->id]) !!}</li>
                         </ul>
                     </li>
                 @else

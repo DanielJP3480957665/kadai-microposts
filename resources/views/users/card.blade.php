@@ -1,3 +1,4 @@
+
 <div class="card">
     <div class="card-header">
         <h2 class="card-title">{{$user->name }}</h2>
